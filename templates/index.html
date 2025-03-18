@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Traffic Accident Hotspots</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>NYC Traffic Accident Hotspots</h1>
+            <p>Plan safer routes by visualizing accident-prone areas</p>
+            <div class="header-links">
+                <a href="/dash/" class="dashboard-link">
+                    <i class="fas fa-chart-bar"></i> Advanced Data Analysis Dashboard
+                </a>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="search-box">
+                    <h2>Route Safety Analysis</h2>
+                    <div class="input-group">
+                        <label for="from-location">From:</label>
+                        <input type="text" id="from-location" placeholder="Enter starting location">
+                    </div>
+                    <div class="input-group">
+                        <label for="to-location">To:</label>
+                        <input type="text" id="to-location" placeholder="Enter destination">
+                    </div>
+                    <button id="analyze-btn"><i class="fas fa-search"></i> Analyze Route</button>
+                </div>
+                
+                <div class="results-box" id="results-container" style="display: none;">
+                    <h2>Safety Analysis Results</h2>
+                    <div class="safety-score">
+                        <h3>Route Safety Score</h3>
+                        <div class="score-display">
+                            <div id="safety-score-value">95</div>
+                            <div id="safety-level">High Safety</div>
+                        </div>
+                    </div>
+                    
+                    <div class="accident-stats">
+                        <h3>Accident Statistics</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Accidents Near Route:</span>
+                            <span class="stat-value" id="accident-count">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Injuries:</span>
+                            <span class="stat-value" id="injury-count">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Total Fatalities:</span>
+                            <span class="stat-value" id="fatality-count">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="top-factors">
+                        <h3>Common Accident Causes</h3>
+                        <ul id="factors-list">
+                            <!-- Will be populated by JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="data-summary">
+                    <h2>Dataset Overview</h2>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Accidents:</span>
+                        <span class="stat-value" id="total-accidents">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Injuries:</span>
+                        <span class="stat-value" id="total-injuries">Loading...</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Fatalities:</span>
+                        <span class="stat-value" id="total-fatalities">Loading...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="map-legend">
+                    <h3>Heatmap</h3>
+                    <div class="legend-item">
+                        <span class="color-box high"></span>
+                        <span>High Accident Density</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="color-box medium"></span>
+                        <span>Medium Accident Density</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="color-box low"></span>
+                        <span>Low Accident Density</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dashboard Section -->
+        <div class="dashboard">
+            <h2>Accident Analysis Dashboard</h2>
+            
+            <div class="dashboard-grid">
+                <!-- Time Series Chart -->
+                <div class="dashboard-card">
+                    <h3>Accident Trends Over Time</h3>
+                    <div class="chart-container">
+                        <canvas id="time-series-chart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Contributing Factors Chart -->
+                <div class="dashboard-card">
+                    <h3>Top Contributing Factors</h3>
+                    <div class="chart-container">
+                        <canvas id="factors-chart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Time of Day Chart -->
+                <div class="dashboard-card">
+                    <h3>Accidents by Time of Day</h3>
+                    <div class="chart-container">
+                        <canvas id="time-of-day-chart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Borough Chart -->
+                <div class="dashboard-card">
+                    <h3>Accidents by Borough</h3>
+                    <div class="chart-container">
+                        <canvas id="borough-chart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Severity Distribution Chart -->
+                <div class="dashboard-card">
+                    <h3>Accident Severity Distribution</h3>
+                    <div class="chart-container">
+                        <canvas id="severity-chart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Day of Week Chart -->
+                <div class="dashboard-card">
+                    <h3>Accidents by Day of Week</h3>
+                    <div class="chart-container">
+                        <canvas id="day-of-week-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2025 NYC Traffic Accident Hotspots - Data Analysis Project</p>
+        </footer>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Make sure Leaflet.heat is loaded after Leaflet -->
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
