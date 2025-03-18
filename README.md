@@ -1,6 +1,6 @@
 # NYC Traffic Accident Analysis Project
 
-![Project Banner](https://example.com/project-banner.jpg)
+![Project Banner](https://raw.githubusercontent.com/vikramdatthb/AcciTrack/refs/heads/main/images/screenshot_3_18_2025_3-15-30%20AM.png)
 
 ## Project Overview
 
@@ -51,9 +51,6 @@ def categorize_time(hour):
 ## Project Components
 
 ### 1. Data Preprocessing Module
-
-![Data Preprocessing](https://example.com/data-preprocessing.jpg)
-
 The `convert_data.py` script handles the initial data processing:
 
 - Converts raw accident data from text to CSV format
@@ -67,8 +64,6 @@ The `convert_data.py` script handles the initial data processing:
   - Accident location scatter plots
 
 ### 2. Main Analysis Engine
-
-![Analysis Engine](https://example.com/analysis-engine.jpg)
 
 The core analysis functionality in `app.py` provides:
 
@@ -97,7 +92,10 @@ if close_accidents:
 
 ### 3. Advanced Analytics Dashboard
 
-![Analytics Dashboard](https://example.com/analytics-dashboard.jpg)
+![Analytics Dashboard](https://raw.githubusercontent.com/vikramdatthb/AcciTrack/refs/heads/main/images/screenshot_3_18_2025_3-22-30%20AM.png)
+![Analytics Dashboard](https://raw.githubusercontent.com/vikramdatthb/AcciTrack/refs/heads/main/images/screenshot_3_18_2025_3-23-08%20AM.png)
+![Analytics Dashboard](https://raw.githubusercontent.com/vikramdatthb/AcciTrack/refs/heads/main/images/screenshot_3_18_2025_3-24-33%20AM.png)
+![Analytics Dashboard](https://raw.githubusercontent.com/vikramdatthb/AcciTrack/refs/heads/main/images/screenshot_3_18_2025_4-27-35%20AM.png)
 
 The `dash_app.py` module provides an advanced data analysis dashboard with:
 
@@ -116,7 +114,8 @@ The dashboard leverages Plotly and Dash to create interactive, responsive visual
 
 ### 4. Interactive Web Interface
 
-![Web Interface](https://example.com/web-interface.jpg)
+![Analytics Dashboard](https://raw.githubusercontent.com/vikramdatthb/AcciTrack/refs/heads/main/images/screenshot_3_18_2025_3-12-00%20AM.png)
+![Analytics Dashboard](https://raw.githubusercontent.com/vikramdatthb/AcciTrack/refs/heads/main/images/Screenshot%202025-03-18%20031843.png)
 
 While the primary focus is data analysis, the project includes a web interface to make the insights accessible:
 
@@ -144,9 +143,6 @@ While the primary focus is data analysis, the project includes a web interface t
 - **Choropleth Maps**: Display borough-level statistics
 
 ### Web Development Implementation
-
-![Web Stack](https://example.com/web-stack.jpg)
-
 While data analysis is the primary focus of this project, a lightweight web application was developed to make the insights accessible and interactive:
 
 - **Flask Framework**: Powers the main application backend, handling data requests and API endpoints
