@@ -1,4 +1,4 @@
-# NYC Traffic Accident Analysis Project
+# Traffic Accident Analysis Project
 
 ![Project Banner](https://raw.githubusercontent.com/vikramdatthb/AcciTrack/refs/heads/main/images/screenshot_3_18_2025_3-15-30%20AM.png)
 
