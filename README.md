@@ -30,7 +30,7 @@ The project implements a robust data processing pipeline that handles raw accide
 5. **Visualization Generation**: Creates static visualizations for initial data exploration
 
 ```python
-# Example of severity score calculation from the codebase
+# severity score calculation 
 df['SEVERITY'] = df['NUMBER OF PERSONS INJURED'] + df['NUMBER OF PERSONS KILLED'] * 5
 
 # Example of time categorization
@@ -83,7 +83,7 @@ The core analysis functionality in `app.py` provides:
 - **Factor Analysis**: Identifies correlations between contributing factors and accident severity
 
 ```python
-# Example of the route safety scoring algorithm
+# route safety scoring algorithm
 safety_score = 100
 if close_accidents:
     # Reduce score based on number and severity of accidents
@@ -163,7 +163,7 @@ The web implementation follows a modular architecture:
 4. **Route Analysis Interface**: User-friendly input for location-based safety analysis
 
 ```javascript
-// Example of heatmap implementation with Leaflet.js
+//heatmap implementation with Leaflet.js
 heatmapLayer = L.heatLayer(heatmapData, {
     radius: 30,         // Larger radius for better visibility
     blur: 20,           // More blur for smoother appearance
